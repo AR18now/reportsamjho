@@ -31,3 +31,23 @@ def test_analyze_full_flow(monkeypatch):
     assert by["C-Reactive Protein"].explanation is None      # not in KB -> no AI explanation
     assert a.results[0].status in ("far_high", "far_low")   # most urgent first
     assert len(a.dropped) == 1
+
+
+def test_json_mode_rejected_falls_back_to_plain_request():
+    from openai import BadRequestError
+
+    calls = []
+
+    class Picky:
+        def create(self, **kw):
+            calls.append("response_format" in kw)
+            if "response_format" in kw:
+                err = BadRequestError.__new__(BadRequestError)  # skip HTTP-response plumbing
+                Exception.__init__(err, "JSON mode not supported")
+                raise err
+            msg = SimpleNamespace(content='Here you go: {"tests": []}')
+            return SimpleNamespace(choices=[SimpleNamespace(message=msg)])
+
+    client = SimpleNamespace(chat=SimpleNamespace(completions=Picky()))
+    assert pl._chat_json(client, "m", "sys", "user") == {"tests": []}
+    assert calls == [True, False]

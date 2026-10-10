@@ -20,7 +20,7 @@ KB_PATH = Path(__file__).resolve().parent.parent / "knowledge" / "tests.json"
 MAX_REPORT_CHARS = 12000
 
 # --------------------------------------------------------------------------
-# Model client (OpenRouter, Groq or Ollama, all OpenAI-compatible)
+# Model client (Cloudflare, OpenRouter, Groq or Ollama, all OpenAI-compatible)
 # --------------------------------------------------------------------------
 PROVIDERS = {
     # Groq shut down llama-3.1-8b-instant on 2026-08-16 and has no <=8B
@@ -29,6 +29,13 @@ PROVIDERS = {
         "base_url": "https://openrouter.ai/api/v1",
         "default_model": "liquid/lfm-2.5-2.6b:free",
         "key_env": "OPENROUTER_API_KEY",
+    },
+    # Cloudflare Workers AI: Llama 3.1 8B on a free daily allowance.
+    # The URL needs the account id, filled in from CLOUDFLARE_ACCOUNT_ID.
+    "cloudflare": {
+        "base_url": "https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/v1",
+        "default_model": "@cf/meta/llama-3.1-8b-instruct-fp8",
+        "key_env": "CLOUDFLARE_API_TOKEN",
     },
     "groq": {
         "base_url": "https://api.groq.com/openai/v1",
@@ -52,6 +59,11 @@ def get_client():
         raise ValueError(f"LLM_PROVIDER must be one of {list(PROVIDERS)}")
     cfg = PROVIDERS[provider]
     base_url = os.getenv("LLM_BASE_URL", cfg["base_url"])
+    if "{account_id}" in base_url:
+        account = os.getenv("CLOUDFLARE_ACCOUNT_ID")
+        if not account:
+            raise RuntimeError("Set CLOUDFLARE_ACCOUNT_ID in your .env file.")
+        base_url = base_url.format(account_id=account)
     model = os.getenv("LLM_MODEL", cfg["default_model"])
     if cfg["key_env"]:
         key = os.getenv(cfg["key_env"])
@@ -66,13 +78,17 @@ def get_client():
 
 def _chat_json(client, model: str, system: str, user: str) -> Any:
     """Call the model at temperature 0 and parse a JSON object from the reply."""
-    resp = client.chat.completions.create(
-        model=model,
-        temperature=0,
-        response_format={"type": "json_object"},
-        messages=[{"role": "system", "content": system},
-                  {"role": "user", "content": user}],
-    )
+    from openai import BadRequestError
+
+    kwargs = dict(model=model, temperature=0,
+                  messages=[{"role": "system", "content": system},
+                            {"role": "user", "content": user}])
+    try:
+        resp = client.chat.completions.create(response_format={"type": "json_object"}, **kwargs)
+    except BadRequestError:
+        # Some providers/models reject JSON mode; the prompt still asks for
+        # JSON and parse_json_loose copes with extra text around it.
+        resp = client.chat.completions.create(**kwargs)
     return parse_json_loose(resp.choices[0].message.content or "")
 
 
