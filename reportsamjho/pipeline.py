@@ -59,7 +59,9 @@ def get_client():
             raise RuntimeError(f"Set {cfg['key_env']} in your .env file.")
     else:
         key = "ollama"  # Ollama ignores the key but the client needs one
-    return OpenAI(base_url=base_url, api_key=key), model, provider
+    # Fail with a clear message instead of spinning when a free tier is slow or queued.
+    timeout = float(os.getenv("LLM_TIMEOUT", "240"))
+    return OpenAI(base_url=base_url, api_key=key, timeout=timeout, max_retries=1), model, provider
 
 
 def _chat_json(client, model: str, system: str, user: str) -> Any:
@@ -145,15 +147,18 @@ def tidy_extraction(t: dict) -> dict:
         v, u = value.strip(), unit.strip()
         if v.lower().endswith(u.lower()) and len(v) > len(u):
             t["value"] = v[: -len(u)].strip()
-    # Both limits missing but the range text is there: read it the same way
-    # the extraction prompt asks the model to.
+    # When the range text is a plain pattern, read the limits from it with code
+    # instead of trusting the model's numbers: live runs showed a 2.6B model
+    # turning "> 40" into an upper limit, which made a low HDL look normal.
     ref = t.get("ref_text")
-    if t.get("ref_low") is None and t.get("ref_high") is None and isinstance(ref, str):
+    if isinstance(ref, str):
         if m := REF_RANGE_RE.fullmatch(ref):
             t["ref_low"], t["ref_high"] = float(m.group(1)), float(m.group(2))
         elif m := REF_BOUND_RE.fullmatch(ref):
-            key = "ref_high" if m.group(1) == "<" else "ref_low"
-            t[key] = float(m.group(2))
+            if m.group(1) == "<":
+                t["ref_low"], t["ref_high"] = None, float(m.group(2))
+            else:
+                t["ref_low"], t["ref_high"] = float(m.group(2)), None
     return t
 
 

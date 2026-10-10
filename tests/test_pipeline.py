@@ -71,3 +71,14 @@ def test_tidy_extraction_fixes_small_model_slips():
     # Text values and values that already look right are left alone.
     assert tidy_extraction({"name": "x", "value": "Nil", "unit": None})["value"] == "Nil"
     assert tidy_extraction({"name": "x", "value": "8-10", "unit": "/HPF"})["value"] == "8-10"
+
+
+def test_range_text_overrides_wrong_model_limits():
+    # Seen live: model read "> 40" as an upper limit, so HDL 38 looked normal.
+    t = tidy_extraction({"name": "HDL Cholesterol", "value": "38", "ref_text": "> 40",
+                         "ref_low": None, "ref_high": 40})
+    assert (t["ref_low"], t["ref_high"]) == (40.0, None)
+    assert compute_status(t["value"], t["ref_low"], t["ref_high"]) == "low"
+    # Unusual range text is left to the model's numbers.
+    t = tidy_extraction({"name": "x", "value": "5", "ref_text": "Up to 6", "ref_low": None, "ref_high": 6})
+    assert (t["ref_low"], t["ref_high"]) == (None, 6)

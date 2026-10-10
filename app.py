@@ -170,7 +170,7 @@ with tab_text:
         report_text = pasted.strip()
 
 if st.button("Explain my report", type="primary", disabled=not report_text, use_container_width=True):
-    with st.spinner("Reading your report… this usually takes 10–30 seconds."):
+    with st.spinner("Reading your report… on the free model this can take 1–3 minutes."):
         try:
             st.session_state["analysis"] = analyze(report_text, language)
             st.session_state["lang"] = language
