@@ -5,7 +5,7 @@
 **Description:**
 ReportSamjho helps patients in Pakistan understand their lab reports. Upload a report PDF and it shows which values are outside the normal range, explains what each test measures in simple English, Urdu or Roman Urdu, and lists questions to ask the doctor. An open-weight model (Llama 3.1 8B Instant via Groq, or Qwen3-8B fully offline via Ollama) extracts every test from any lab's layout and writes the explanations. To keep it safe, plain code checks that every value really exists in the report and decides high/low, and explanations come only from a verified list of 39 common tests. It never diagnoses. Domain: Health & Wellness.
 
-**GitHub link:** https://github.com/<your-username>/reportsamjho
+**GitHub link:** https://github.com/AR18now/reportsamjho
 
 **Team:** Ali Rizwan (solo)
 

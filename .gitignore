@@ -8,3 +8,4 @@ venv/
 # Never commit real medical reports. Only synthetic samples belong in samples/.
 uploads/
 real_reports/
+.claude/

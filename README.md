@@ -107,7 +107,7 @@ sequenceDiagram
 **Requirements:** Python 3.10+, and either a free Groq API key or Ollama installed.
 
 ```bash
-git clone https://github.com/<your-username>/reportsamjho.git
+git clone https://github.com/AR18now/reportsamjho.git
 cd reportsamjho
 python -m venv .venv
 source .venv/bin/activate        # Windows: .venv\Scripts\activate
