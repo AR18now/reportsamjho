@@ -20,9 +20,16 @@ KB_PATH = Path(__file__).resolve().parent.parent / "knowledge" / "tests.json"
 MAX_REPORT_CHARS = 12000
 
 # --------------------------------------------------------------------------
-# Model client (Groq or Ollama, both OpenAI-compatible)
+# Model client (OpenRouter, Groq or Ollama, all OpenAI-compatible)
 # --------------------------------------------------------------------------
 PROVIDERS = {
+    # Groq shut down llama-3.1-8b-instant on 2026-08-16 and has no <=8B
+    # replacement, so OpenRouter's free <=8B model is the default.
+    "openrouter": {
+        "base_url": "https://openrouter.ai/api/v1",
+        "default_model": "liquid/lfm-2.5-2.6b:free",
+        "key_env": "OPENROUTER_API_KEY",
+    },
     "groq": {
         "base_url": "https://api.groq.com/openai/v1",
         "default_model": "llama-3.1-8b-instant",
@@ -40,7 +47,7 @@ def get_client():
     """Return (client, model_name, provider) from environment variables."""
     from openai import OpenAI
 
-    provider = os.getenv("LLM_PROVIDER", "groq").lower()
+    provider = os.getenv("LLM_PROVIDER", "openrouter").lower()
     if provider not in PROVIDERS:
         raise ValueError(f"LLM_PROVIDER must be one of {list(PROVIDERS)}")
     cfg = PROVIDERS[provider]

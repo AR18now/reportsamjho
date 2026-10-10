@@ -26,14 +26,14 @@ ReportSamjho reads the report and, for every test:
 - PDF upload, or paste the report text
 - Values outside the range shown first
 - Explanations in English, Urdu (right-to-left), or Roman Urdu
-- Runs on Groq's cloud API, or fully offline with Ollama so medical data never leaves the device
+- Runs on OpenRouter's cloud API, or fully offline with Ollama so medical data never leaves the device
 
 ## AI component
 
 | Item | Detail |
 |---|---|
-| Default model | **Llama 3.1 8B Instant** (`llama-3.1-8b-instant`), 8 billion parameters, open-weight (Meta Llama 3.1 Community License) |
-| Default provider | **Groq API** (OpenAI-compatible endpoint) |
+| Default model | **LFM2.5-2.6B** by Liquid AI (`liquid/lfm-2.5-2.6b:free`), 2.6 billion parameters, open-weight (LFM Open License v1.0) |
+| Default provider | **OpenRouter API** (OpenAI-compatible endpoint). Groq shut down its Llama 3.1 8B on 16 Aug 2026 and has no replacement within 8B, so we moved to OpenRouter's free tier. |
 | Local option | **Qwen3-8B** (`qwen3:8b`), 8 billion parameters, Apache-2.0, via **Ollama** |
 | Max model size used | 8B, within the event limit |
 
@@ -58,7 +58,7 @@ ReportSamjho reads the report and, for every test:
 flowchart LR
     U[User] --> UI[Streamlit web app]
     UI --> P[PDF text extraction<br/>pdfplumber]
-    P --> E[Extraction<br/>Llama 3.1 8B via Groq<br/>or Qwen3-8B via Ollama]
+    P --> E[Extraction<br/>LFM2.5-2.6B via OpenRouter<br/>or Qwen3-8B via Ollama]
     E --> V[Validation code<br/>grounding check + status]
     V --> K[(Verified test knowledge<br/>knowledge/tests.json)]
     K --> X[Explanation<br/>same 8B model]
@@ -90,7 +90,7 @@ sequenceDiagram
     actor User
     participant App as Streamlit app
     participant Code as Validation code
-    participant LLM as 8B model (Groq / Ollama)
+    participant LLM as 8B model (OpenRouter / Ollama)
     User->>App: Upload report, choose language
     App->>App: Extract PDF text
     App->>LLM: Extract tests as JSON
@@ -104,7 +104,7 @@ sequenceDiagram
 
 ## Setup
 
-**Requirements:** Python 3.10+, and either a free Groq API key or Ollama installed.
+**Requirements:** Python 3.10+, and either a free OpenRouter API key (openrouter.ai, no card needed) or Ollama installed.
 
 ```bash
 git clone https://github.com/AR18now/reportsamjho.git
@@ -119,9 +119,9 @@ Edit `.env`:
 
 | Variable | Meaning |
 |---|---|
-| `LLM_PROVIDER` | `groq` (default) or `ollama` |
-| `GROQ_API_KEY` | Your key from console.groq.com (Groq only) |
-| `LLM_MODEL` | Optional. Defaults: `llama-3.1-8b-instant` (Groq), `qwen3:8b` (Ollama) |
+| `LLM_PROVIDER` | `openrouter` (default), `ollama`, or `groq` |
+| `OPENROUTER_API_KEY` | Your key from openrouter.ai/keys (OpenRouter only) |
+| `LLM_MODEL` | Optional. Defaults: `liquid/lfm-2.5-2.6b:free` (OpenRouter), `qwen3:8b` (Ollama) |
 
 **Fully local option:** install Ollama, run `ollama pull qwen3:8b`, and set `LLM_PROVIDER=ollama`.
 
@@ -159,16 +159,16 @@ All test data is synthetic (`samples/sample_report.pdf`, made by `scripts/make_s
 
 | Scenario | Model | Expected | Actual | Result |
 |---|---|---|---|---|
-| Sample report, English | llama-3.1-8b-instant | 14 tests extracted, 0 dropped | _fill in_ | _fill in_ |
-| Sample report, Urdu | llama-3.1-8b-instant | Urdu-script explanations, no diagnosis words | _fill in_ | _fill in_ |
-| Sample report, Roman Urdu | llama-3.1-8b-instant | Roman Urdu explanations | _fill in_ | _fill in_ |
-| Pasted partial report text | llama-3.1-8b-instant | Only the pasted tests | _fill in_ | _fill in_ |
+| Sample report, English | lfm-2.5-2.6b:free | 14 tests extracted, 0 dropped | _fill in_ | _fill in_ |
+| Sample report, Urdu | lfm-2.5-2.6b:free | Urdu-script explanations, no diagnosis words | _fill in_ | _fill in_ |
+| Sample report, Roman Urdu | lfm-2.5-2.6b:free | Roman Urdu explanations | _fill in_ | _fill in_ |
+| Pasted partial report text | lfm-2.5-2.6b:free | Only the pasted tests | _fill in_ | _fill in_ |
 
 **Known limitations**
 
 - Scanned or photographed reports have no text layer; users must paste the text for now (OCR is the next feature).
 - The knowledge list covers 39 common tests; others show a "please ask your doctor" message.
-- Urdu writing quality from 8B models is weaker than English; Qwen3-8B is the recommended local model for Urdu.
+- Urdu writing quality from small models is weaker than English. LFM2.5-2.6B does not officially list Urdu among its languages, and the OpenRouter free tier has daily request limits; Qwen3-8B via Ollama is the recommended local model for Urdu.
 - The "far from range" note uses a simple rule (≤ half the lower limit, ≥ double the upper limit), not clinical critical values.
 - Reference ranges are taken from the report itself; reports without ranges get "No range on report".
 
@@ -196,7 +196,7 @@ MIT, see [LICENSE](LICENSE).
 
 ## Acknowledgements
 
-- **Meta Llama 3.1 8B** (Llama 3.1 Community License), served by **Groq**
+- **Liquid AI LFM2.5-2.6B** (LFM Open License v1.0), served free via **OpenRouter**
 - **Qwen3-8B** by the Qwen team (Apache-2.0), served locally by **Ollama**
 - **MedlinePlus** (U.S. National Library of Medicine), used to check our plain-language test summaries, which are written in our own words
 - **Streamlit**, **pdfplumber**, **OpenAI Python SDK** (used as a client for OpenAI-compatible endpoints), **python-dotenv**, **ReportLab**, **pytest**
