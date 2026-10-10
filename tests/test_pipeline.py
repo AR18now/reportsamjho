@@ -3,7 +3,7 @@ The model's extraction output is simulated with what a correct extraction looks 
 import json
 from pathlib import Path
 
-from reportsamjho.pipeline import (build_results, compute_status, load_kb, match_kb,
+from reportsamjho.pipeline import (build_results, compute_status, load_kb, match_kb, tidy_extraction,
                                    parse_json_loose, pdf_to_text, value_in_report)
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -55,3 +55,19 @@ def test_sample_report_end_to_end_offline():
 def test_json_parsing_tolerates_wrappers():
     assert parse_json_loose('```json\n{"tests": []}\n```') == {"tests": []}
     assert parse_json_loose('<think>hmm</think>{"a": 1}') == {"a": 1}
+
+
+def test_tidy_extraction_fixes_small_model_slips():
+    # Unit glued onto the value (seen live with LFM2.5-2.6B) is split off.
+    t = tidy_extraction({"name": "Haemoglobin", "value": "10.8 g/dL", "unit": "g/dL",
+                         "ref_low": 12.0, "ref_high": 16.0})
+    assert t["value"] == "10.8"
+    assert compute_status(t["value"], t["ref_low"], t["ref_high"]) == "low"
+    # Missing numeric limits are read from the range text.
+    t = tidy_extraction({"name": "x", "value": "236", "ref_text": "< 200", "ref_low": None, "ref_high": None})
+    assert (t["ref_low"], t["ref_high"]) == (None, 200.0)
+    t = tidy_extraction({"name": "x", "value": "71", "ref_text": "80 - 100"})
+    assert (t["ref_low"], t["ref_high"]) == (80.0, 100.0)
+    # Text values and values that already look right are left alone.
+    assert tidy_extraction({"name": "x", "value": "Nil", "unit": None})["value"] == "Nil"
+    assert tidy_extraction({"name": "x", "value": "8-10", "unit": "/HPF"})["value"] == "8-10"

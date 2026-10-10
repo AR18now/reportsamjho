@@ -108,8 +108,8 @@ Return ONLY a JSON object: {"tests": [ ... ]}. Each item:
 {
  "panel": section heading the test is under (e.g. "Complete Blood Count", "Urine R/E", "Lipid Profile"), or null,
  "name": test name exactly as written,
- "value": the result exactly as written (string, e.g. "13.2" or "Nil" or "Positive"),
- "unit": unit as written or null,
+ "value": the result exactly as written, WITHOUT the unit (string, e.g. "13.2" or "8-10" or "Nil" or "Positive"),
+ "unit": unit as written or null (e.g. "g/dL"),
  "ref_low": lower limit of the reference range as a number, or null,
  "ref_high": upper limit of the reference range as a number, or null,
  "ref_text": the reference range exactly as written, or null
@@ -125,7 +125,36 @@ def extract_tests(client, model: str, report_text: str) -> list[dict]:
     data = _chat_json(client, model, EXTRACT_SYSTEM,
                       "LAB REPORT TEXT:\n" + report_text[:MAX_REPORT_CHARS])
     tests = data.get("tests", []) if isinstance(data, dict) else []
-    return [t for t in tests if isinstance(t, dict) and t.get("name")]
+    return [tidy_extraction(t) for t in tests if isinstance(t, dict) and t.get("name")]
+
+
+REF_RANGE_RE = re.compile(r"\s*(\d+(?:\.\d+)?)\s*-\s*(\d+(?:\.\d+)?)\s*")
+REF_BOUND_RE = re.compile(r"\s*([<>])=?\s*(\d+(?:\.\d+)?)\s*")
+
+
+def tidy_extraction(t: dict) -> dict:
+    """Undo common small-model formatting slips before validation runs.
+
+    Only reshapes what the model returned; never adds a number that is not
+    already in its output. Validation (grounding + status) is unchanged.
+    """
+    t = dict(t)
+    value, unit = t.get("value"), t.get("unit")
+    # "10.8 g/dL" with unit "g/dL" -> "10.8"
+    if isinstance(value, str) and isinstance(unit, str) and unit.strip():
+        v, u = value.strip(), unit.strip()
+        if v.lower().endswith(u.lower()) and len(v) > len(u):
+            t["value"] = v[: -len(u)].strip()
+    # Both limits missing but the range text is there: read it the same way
+    # the extraction prompt asks the model to.
+    ref = t.get("ref_text")
+    if t.get("ref_low") is None and t.get("ref_high") is None and isinstance(ref, str):
+        if m := REF_RANGE_RE.fullmatch(ref):
+            t["ref_low"], t["ref_high"] = float(m.group(1)), float(m.group(2))
+        elif m := REF_BOUND_RE.fullmatch(ref):
+            key = "ref_high" if m.group(1) == "<" else "ref_low"
+            t[key] = float(m.group(2))
+    return t
 
 
 # --------------------------------------------------------------------------
@@ -285,6 +314,8 @@ class Result:
     grounded: bool
     kb: dict | None = None
     explanation: str | None = None
+    ref_low: Any = None   # passed through for the range bar in the UI
+    ref_high: Any = None
 
 
 @dataclass
@@ -313,6 +344,7 @@ def build_results(raw_tests: list[dict], report_text: str, kb: list[dict]) -> An
         a.results.append(Result(
             id=str(i), name=str(t["name"]), panel=t.get("panel"), value=t.get("value"),
             unit=t.get("unit"), ref_text=t.get("ref_text"), status=status, grounded=True,
+            ref_low=t.get("ref_low"), ref_high=t.get("ref_high"),
             kb=match_kb(str(t["name"]), t.get("panel"), kb),
         ))
     a.results.sort(key=lambda r: STATUS_ORDER.get(r.status, 5))
