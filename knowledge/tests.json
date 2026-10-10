@@ -1,0 +1,575 @@
+{
+  "version": 1,
+  "source_note": "Plain-language summaries written by the team, checked against MedlinePlus. Not medical advice.",
+  "tests": [
+    {
+      "id": "hemoglobin",
+      "aliases": [
+        "Hemoglobin",
+        "Haemoglobin",
+        "Hb",
+        "HGB",
+        "Hb%"
+      ],
+      "panel_keywords": [],
+      "measures": "The protein in red blood cells that carries oxygen around the body.",
+      "high_means": "Can be linked to dehydration, smoking, living at high altitude, or some lung, heart or blood conditions.",
+      "low_means": "Can be linked to anemia, often from low iron, vitamin B12 or folate, or from blood loss. Low levels can cause tiredness and weakness.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "rbc",
+      "aliases": [
+        "RBC",
+        "Red Blood Cells",
+        "RBC Count",
+        "Red Cell Count",
+        "Total RBC"
+      ],
+      "panel_keywords": [],
+      "measures": "The number of red blood cells, which carry oxygen.",
+      "high_means": "Can be linked to dehydration, smoking, or some heart, lung or bone marrow conditions.",
+      "low_means": "Can be linked to anemia, blood loss, or nutritional deficiencies.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "wbc",
+      "aliases": [
+        "WBC",
+        "TLC",
+        "Total Leucocyte Count",
+        "Total Leukocyte Count",
+        "White Blood Cells",
+        "WBC Count",
+        "White Cell Count"
+      ],
+      "panel_keywords": [],
+      "measures": "The number of white blood cells, which fight infection.",
+      "high_means": "Can be linked to infection, inflammation, stress, some medicines, or less commonly blood disorders.",
+      "low_means": "Can be linked to some viral infections, certain medicines, or bone marrow problems, and can lower the body's ability to fight infection.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "platelets",
+      "aliases": [
+        "Platelets",
+        "Platelet Count",
+        "PLT"
+      ],
+      "panel_keywords": [],
+      "measures": "Small blood cells that help blood clot and stop bleeding.",
+      "high_means": "Can be linked to infection, inflammation, iron deficiency, or some bone marrow conditions.",
+      "low_means": "Can be linked to viral infections such as dengue, some medicines, or bone marrow problems, and can increase bleeding or bruising.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "hct",
+      "aliases": [
+        "HCT",
+        "Hematocrit",
+        "Haematocrit",
+        "PCV",
+        "Packed Cell Volume"
+      ],
+      "panel_keywords": [],
+      "measures": "The share of your blood made up of red blood cells.",
+      "high_means": "Can be linked to dehydration or conditions that increase red blood cells.",
+      "low_means": "Can be linked to anemia or blood loss.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "mcv",
+      "aliases": [
+        "MCV",
+        "Mean Corpuscular Volume",
+        "Mean Cell Volume"
+      ],
+      "panel_keywords": [],
+      "measures": "The average size of your red blood cells.",
+      "high_means": "Larger cells can be linked to low vitamin B12 or folate, liver conditions, or alcohol use.",
+      "low_means": "Smaller cells are often linked to iron deficiency or inherited conditions such as thalassemia trait.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "mch",
+      "aliases": [
+        "MCH",
+        "Mean Corpuscular Hemoglobin",
+        "Mean Corpuscular Haemoglobin"
+      ],
+      "panel_keywords": [],
+      "measures": "The average amount of hemoglobin inside each red blood cell.",
+      "high_means": "Can be linked to larger red cells, for example from low vitamin B12 or folate.",
+      "low_means": "Can be linked to iron deficiency or thalassemia trait.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "mchc",
+      "aliases": [
+        "MCHC",
+        "Mean Corpuscular Hemoglobin Concentration"
+      ],
+      "panel_keywords": [],
+      "measures": "How concentrated hemoglobin is inside red blood cells.",
+      "high_means": "Can be linked to some inherited red cell conditions, or can be a measurement effect.",
+      "low_means": "Can be linked to iron deficiency anemia.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "rdw",
+      "aliases": [
+        "RDW",
+        "RDW-CV",
+        "Red Cell Distribution Width"
+      ],
+      "panel_keywords": [],
+      "measures": "How much your red blood cells vary in size.",
+      "high_means": "Can be linked to mixed or changing causes of anemia, such as iron or vitamin deficiency.",
+      "low_means": "A low value is usually not a concern.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "neutrophils",
+      "aliases": [
+        "Neutrophils",
+        "Neutrophil",
+        "Polymorphs"
+      ],
+      "panel_keywords": [],
+      "measures": "The most common type of white blood cell, the first responders to bacterial infection.",
+      "high_means": "Can be linked to bacterial infection, inflammation, stress, or steroid medicines.",
+      "low_means": "Can be linked to some viral infections, certain medicines, or bone marrow problems.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "lymphocytes",
+      "aliases": [
+        "Lymphocytes",
+        "Lymphocyte"
+      ],
+      "panel_keywords": [],
+      "measures": "White blood cells that fight viral infections and make antibodies.",
+      "high_means": "Can be linked to viral infections or, less commonly, some blood disorders.",
+      "low_means": "Can be linked to some infections, steroid medicines, or immune system problems.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "eosinophils",
+      "aliases": [
+        "Eosinophils",
+        "Eosinophil"
+      ],
+      "panel_keywords": [],
+      "measures": "White blood cells involved in allergies and fighting parasites.",
+      "high_means": "Can be linked to allergies, asthma, or parasitic (worm) infections.",
+      "low_means": "A low value is usually not a concern.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "esr",
+      "aliases": [
+        "ESR",
+        "Erythrocyte Sedimentation Rate"
+      ],
+      "panel_keywords": [],
+      "measures": "A general marker of inflammation in the body.",
+      "high_means": "Can be linked to infection, inflammation, or some chronic conditions. It does not point to one specific cause.",
+      "low_means": "A low value is usually not a concern.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "fbs",
+      "aliases": [
+        "Fasting Blood Sugar",
+        "FBS",
+        "Fasting Glucose",
+        "Glucose Fasting",
+        "Fasting Plasma Glucose",
+        "Blood Sugar Fasting",
+        "Blood Glucose Fasting"
+      ],
+      "panel_keywords": [],
+      "measures": "The sugar level in your blood after not eating for 8 or more hours.",
+      "high_means": "Can be linked to prediabetes or diabetes, stress, or some medicines.",
+      "low_means": "Can be linked to long fasting, some diabetes medicines, or less commonly other conditions. Very low sugar can cause shakiness, sweating or confusion.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "rbs",
+      "aliases": [
+        "Random Blood Sugar",
+        "RBS",
+        "Random Glucose",
+        "Blood Sugar Random",
+        "Glucose Random"
+      ],
+      "panel_keywords": [],
+      "measures": "The sugar level in your blood at any time of day, regardless of meals.",
+      "high_means": "Can be linked to diabetes, a recent meal, stress, or some medicines.",
+      "low_means": "Can be linked to not eating for a long time or some diabetes medicines.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "hba1c",
+      "aliases": [
+        "HbA1c",
+        "HBA1C",
+        "Glycated Hemoglobin",
+        "Glycosylated Hemoglobin",
+        "A1c",
+        "Hemoglobin A1c"
+      ],
+      "panel_keywords": [],
+      "measures": "Your average blood sugar over roughly the past 2 to 3 months.",
+      "high_means": "Can be linked to prediabetes or diabetes, or to diabetes that is not well controlled.",
+      "low_means": "A low value is usually not a concern, though some blood conditions can affect the result.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "cholesterol",
+      "aliases": [
+        "Total Cholesterol",
+        "Cholesterol",
+        "Serum Cholesterol",
+        "Cholesterol Total"
+      ],
+      "panel_keywords": [],
+      "measures": "The total amount of cholesterol, a type of fat, in your blood.",
+      "high_means": "Can be linked to diet, genetics, low activity, or thyroid problems, and raises the long-term risk of heart disease.",
+      "low_means": "A low value is usually not a concern.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "ldl",
+      "aliases": [
+        "LDL",
+        "LDL Cholesterol",
+        "LDL-C",
+        "Low Density Lipoprotein"
+      ],
+      "panel_keywords": [],
+      "measures": "The 'bad' cholesterol that can build up in blood vessel walls.",
+      "high_means": "Higher levels raise the long-term risk of heart disease and stroke.",
+      "low_means": "A low value is generally considered favorable.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "hdl",
+      "aliases": [
+        "HDL",
+        "HDL Cholesterol",
+        "HDL-C",
+        "High Density Lipoprotein"
+      ],
+      "panel_keywords": [],
+      "measures": "The 'good' cholesterol that helps remove other cholesterol from the blood.",
+      "high_means": "Higher levels are generally considered protective.",
+      "low_means": "Low levels can be linked to low activity, smoking or excess weight, and raise heart disease risk.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "triglycerides",
+      "aliases": [
+        "Triglycerides",
+        "TG",
+        "Serum Triglycerides"
+      ],
+      "panel_keywords": [],
+      "measures": "A type of fat in the blood that comes largely from food.",
+      "high_means": "Can be linked to diet high in sugar or fat, excess weight, alcohol, or diabetes, and raises heart disease risk.",
+      "low_means": "A low value is usually not a concern.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "alt",
+      "aliases": [
+        "ALT",
+        "SGPT",
+        "ALT (SGPT)",
+        "SGPT (ALT)",
+        "Alanine Aminotransferase"
+      ],
+      "panel_keywords": [],
+      "measures": "An enzyme found mainly in the liver. It rises when liver cells are irritated or damaged.",
+      "high_means": "Can be linked to fatty liver, hepatitis, some medicines, or alcohol use.",
+      "low_means": "A low value is usually not a concern.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "ast",
+      "aliases": [
+        "AST",
+        "SGOT",
+        "AST (SGOT)",
+        "SGOT (AST)",
+        "Aspartate Aminotransferase"
+      ],
+      "panel_keywords": [],
+      "measures": "An enzyme found in the liver, heart and muscles.",
+      "high_means": "Can be linked to liver irritation, recent heavy exercise, or muscle injury.",
+      "low_means": "A low value is usually not a concern.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "alp",
+      "aliases": [
+        "ALP",
+        "Alkaline Phosphatase",
+        "Alk Phos"
+      ],
+      "panel_keywords": [],
+      "measures": "An enzyme found mainly in the liver and bones.",
+      "high_means": "Can be linked to liver or bile duct problems or bone conditions. It is normally higher in growing children and in pregnancy.",
+      "low_means": "Can be linked to low zinc or poor nutrition, though often not a concern.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "bilirubin",
+      "aliases": [
+        "Total Bilirubin",
+        "Bilirubin Total",
+        "Bilirubin",
+        "Serum Bilirubin",
+        "S. Bilirubin"
+      ],
+      "panel_keywords": [],
+      "measures": "A yellow substance made when old red blood cells break down, cleared by the liver.",
+      "high_means": "Can be linked to liver problems, blocked bile flow, or faster breakdown of red cells, and can cause yellow skin or eyes (jaundice).",
+      "low_means": "A low value is usually not a concern.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "albumin",
+      "aliases": [
+        "Albumin",
+        "Serum Albumin",
+        "S. Albumin"
+      ],
+      "panel_keywords": [],
+      "measures": "The main protein in blood, made by the liver.",
+      "high_means": "Can be linked to dehydration.",
+      "low_means": "Can be linked to poor nutrition, liver problems, or kidney problems that leak protein.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "creatinine",
+      "aliases": [
+        "Creatinine",
+        "Serum Creatinine",
+        "S. Creatinine",
+        "Creatinine Serum"
+      ],
+      "panel_keywords": [],
+      "measures": "A waste product from muscles, removed by the kidneys. It shows how well the kidneys filter.",
+      "high_means": "Can be linked to reduced kidney function, dehydration, high muscle mass, or some medicines.",
+      "low_means": "Can be linked to low muscle mass, and is usually not a concern.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "urea",
+      "aliases": [
+        "Urea",
+        "Blood Urea",
+        "Serum Urea",
+        "BUN",
+        "Blood Urea Nitrogen"
+      ],
+      "panel_keywords": [],
+      "measures": "A waste product from breaking down protein, removed by the kidneys.",
+      "high_means": "Can be linked to dehydration, reduced kidney function, or a high-protein diet.",
+      "low_means": "Can be linked to a low-protein diet or liver problems, and is often not a concern.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "uric_acid",
+      "aliases": [
+        "Uric Acid",
+        "Serum Uric Acid",
+        "S. Uric Acid"
+      ],
+      "panel_keywords": [],
+      "measures": "A waste product from breaking down purines, found in some foods like red meat.",
+      "high_means": "Can be linked to gout, kidney stones, diet, or reduced kidney function.",
+      "low_means": "A low value is usually not a concern.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "egfr",
+      "aliases": [
+        "eGFR",
+        "Estimated GFR",
+        "GFR"
+      ],
+      "panel_keywords": [],
+      "measures": "An estimate of how well your kidneys filter blood, calculated from creatinine.",
+      "high_means": "A higher value is usually not a concern.",
+      "low_means": "Can be linked to reduced kidney function. Your doctor will look at it alongside other results.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "tsh",
+      "aliases": [
+        "TSH",
+        "Thyroid Stimulating Hormone"
+      ],
+      "panel_keywords": [],
+      "measures": "A hormone from the brain that tells the thyroid gland how much hormone to make.",
+      "high_means": "Can be linked to an underactive thyroid (hypothyroidism), which can cause tiredness, weight gain and feeling cold.",
+      "low_means": "Can be linked to an overactive thyroid (hyperthyroidism), which can cause a fast heartbeat, weight loss and anxiety.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "t4",
+      "aliases": [
+        "Free T4",
+        "FT4",
+        "T4",
+        "Thyroxine"
+      ],
+      "panel_keywords": [],
+      "measures": "The main hormone made by the thyroid gland, which controls metabolism.",
+      "high_means": "Can be linked to an overactive thyroid.",
+      "low_means": "Can be linked to an underactive thyroid.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "t3",
+      "aliases": [
+        "Free T3",
+        "FT3",
+        "T3",
+        "Triiodothyronine"
+      ],
+      "panel_keywords": [],
+      "measures": "An active thyroid hormone that controls metabolism.",
+      "high_means": "Can be linked to an overactive thyroid.",
+      "low_means": "Can be linked to an underactive thyroid or illness.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "vit_d",
+      "aliases": [
+        "Vitamin D",
+        "25-OH Vitamin D",
+        "25 Hydroxy Vitamin D",
+        "Vit D",
+        "25(OH)D",
+        "Vitamin D3"
+      ],
+      "panel_keywords": [],
+      "measures": "The vitamin that helps the body absorb calcium for strong bones.",
+      "high_means": "Very high levels are usually from taking too many supplements.",
+      "low_means": "Can be linked to little sun exposure or diet, and to bone pain, weakness or tiredness.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "vit_b12",
+      "aliases": [
+        "Vitamin B12",
+        "B12",
+        "Vit B12",
+        "Cobalamin"
+      ],
+      "panel_keywords": [],
+      "measures": "A vitamin needed for nerves and for making red blood cells.",
+      "high_means": "A high value is usually not a concern, often from supplements.",
+      "low_means": "Can be linked to diet, absorption problems, or some medicines, and can cause tiredness, numbness or anemia.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "ferritin",
+      "aliases": [
+        "Ferritin",
+        "Serum Ferritin"
+      ],
+      "panel_keywords": [],
+      "measures": "A protein that stores iron. It shows your body's iron reserves.",
+      "high_means": "Can be linked to inflammation, infection, liver conditions, or iron overload.",
+      "low_means": "Can be linked to low iron stores, a common cause of anemia.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "urine_ph",
+      "aliases": [
+        "pH",
+        "Reaction",
+        "Reaction (pH)",
+        "Urine pH"
+      ],
+      "panel_keywords": [
+        "urine",
+        "r e",
+        "routine",
+        "urinalysis",
+        "complete examination"
+      ],
+      "measures": "How acidic or alkaline your urine is. It changes with diet and fluids.",
+      "high_means": "More alkaline urine can be linked to diet (e.g. lots of vegetables), some urinary infections, or kidney conditions.",
+      "low_means": "More acidic urine can be linked to diet (e.g. high protein), dehydration, or some metabolic conditions.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "urine_sg",
+      "aliases": [
+        "Specific Gravity",
+        "Sp. Gravity",
+        "SG",
+        "Specific Gravity (urine)"
+      ],
+      "panel_keywords": [
+        "urine",
+        "r e",
+        "routine",
+        "urinalysis",
+        "complete examination"
+      ],
+      "measures": "How concentrated your urine is.",
+      "high_means": "Can be linked to not drinking enough water.",
+      "low_means": "Can be linked to drinking a lot of water, or some kidney or hormone conditions.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "urine_pus",
+      "aliases": [
+        "Pus Cells",
+        "Pus cells",
+        "WBC",
+        "WBCs",
+        "WBC (urine)",
+        "Leucocytes"
+      ],
+      "panel_keywords": [
+        "urine",
+        "r e",
+        "routine",
+        "urinalysis",
+        "complete examination"
+      ],
+      "measures": "White blood cells in urine.",
+      "high_means": "Can be linked to a urinary tract infection or inflammation.",
+      "low_means": "A low or nil value is normal.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    },
+    {
+      "id": "urine_rbc",
+      "aliases": [
+        "Red Cells",
+        "RBCs",
+        "RBC",
+        "Red Blood Cells",
+        "Red Blood Cells (urine)"
+      ],
+      "panel_keywords": [
+        "urine",
+        "r e",
+        "routine",
+        "urinalysis",
+        "complete examination"
+      ],
+      "measures": "Red blood cells in urine.",
+      "high_means": "Can be linked to infection, kidney stones, recent heavy exercise, or menstruation. Persistent blood in urine should be checked by a doctor.",
+      "low_means": "A low or nil value is normal.",
+      "source": "MedlinePlus Lab Tests (medlineplus.gov/lab-tests)"
+    }
+  ]
+}

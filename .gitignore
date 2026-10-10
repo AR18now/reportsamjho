@@ -1,0 +1,10 @@
+.env
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+.streamlit/secrets.toml
+# Never commit real medical reports. Only synthetic samples belong in samples/.
+uploads/
+real_reports/

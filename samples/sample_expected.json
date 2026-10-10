@@ -1,0 +1,26 @@
+{
+  "note": "simulated_extraction = what a correct model extraction of sample_report.pdf looks like, plus one invented row ('Fake Test') to prove the grounding check drops it.",
+  "simulated_extraction": [
+    {"panel": "COMPLETE BLOOD COUNT", "name": "Haemoglobin", "value": "10.8", "unit": "g/dL", "ref_low": 12.0, "ref_high": 16.0, "ref_text": "12.0 - 16.0"},
+    {"panel": "COMPLETE BLOOD COUNT", "name": "Total Leucocyte Count", "value": "7.2", "unit": "x10^9/L", "ref_low": 4.0, "ref_high": 11.0, "ref_text": "4.0 - 11.0"},
+    {"panel": "COMPLETE BLOOD COUNT", "name": "Platelet Count", "value": "245", "unit": "x10^9/L", "ref_low": 150, "ref_high": 400, "ref_text": "150 - 400"},
+    {"panel": "COMPLETE BLOOD COUNT", "name": "MCV", "value": "71", "unit": "fL", "ref_low": 80, "ref_high": 100, "ref_text": "80 - 100"},
+    {"panel": "LIPID PROFILE", "name": "Total Cholesterol", "value": "236", "unit": "mg/dL", "ref_low": null, "ref_high": 200, "ref_text": "< 200"},
+    {"panel": "LIPID PROFILE", "name": "HDL Cholesterol", "value": "38", "unit": "mg/dL", "ref_low": 40, "ref_high": null, "ref_text": "> 40"},
+    {"panel": "LIPID PROFILE", "name": "Triglycerides", "value": "142", "unit": "mg/dL", "ref_low": null, "ref_high": 150, "ref_text": "< 150"},
+    {"panel": "LIVER FUNCTION TESTS", "name": "ALT (SGPT)", "value": "64", "unit": "U/L", "ref_low": 0, "ref_high": 40, "ref_text": "0 - 40"},
+    {"panel": "LIVER FUNCTION TESTS", "name": "Total Bilirubin", "value": "0.7", "unit": "mg/dL", "ref_low": 0.2, "ref_high": 1.2, "ref_text": "0.2 - 1.2"},
+    {"panel": "VITAMINS", "name": "25-OH Vitamin D", "value": "14", "unit": "ng/mL", "ref_low": 30, "ref_high": 100, "ref_text": "30 - 100"},
+    {"panel": "INFLAMMATORY MARKERS", "name": "C-Reactive Protein", "value": "3.1", "unit": "mg/L", "ref_low": 0, "ref_high": 5, "ref_text": "0 - 5"},
+    {"panel": "URINE R/E (ROUTINE EXAMINATION)", "name": "Reaction (pH)", "value": "7.0", "unit": null, "ref_low": 4.5, "ref_high": 8.0, "ref_text": "4.5 - 8.0"},
+    {"panel": "URINE R/E (ROUTINE EXAMINATION)", "name": "Specific Gravity", "value": "1.020", "unit": null, "ref_low": 1.005, "ref_high": 1.030, "ref_text": "1.005 - 1.030"},
+    {"panel": "URINE R/E (ROUTINE EXAMINATION)", "name": "Pus Cells", "value": "8-10", "unit": "/HPF", "ref_low": 0, "ref_high": 5, "ref_text": "0 - 5"},
+    {"panel": "COMPLETE BLOOD COUNT", "name": "Fake Test", "value": "99.9", "unit": "mg/dL", "ref_low": 1, "ref_high": 2, "ref_text": "1 - 2"}
+  ],
+  "expected_status": {
+    "Haemoglobin": "low", "Total Leucocyte Count": "normal", "Platelet Count": "normal", "MCV": "low",
+    "Total Cholesterol": "high", "HDL Cholesterol": "low", "Triglycerides": "normal",
+    "ALT (SGPT)": "high", "Total Bilirubin": "normal", "25-OH Vitamin D": "far_low",
+    "C-Reactive Protein": "normal", "Reaction (pH)": "normal", "Specific Gravity": "normal", "Pus Cells": "far_high"
+  }
+}
