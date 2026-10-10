@@ -119,7 +119,10 @@ def scale(r) -> str:
 def row(r, lang: str) -> str:
     label, color = STATUS.get(r.status, ("", "var(--muted)"))
     value = html.escape(f"{r.value} {r.unit or ''}".strip())
-    ref = html.escape(r.ref_text or "—")
+    lo, hi = to_number(r.ref_low), to_number(r.ref_high)
+    fallback = (f"{lo:g} - {hi:g}" if lo is not None and hi is not None
+                else f"< {hi:g}" if hi is not None else f"> {lo:g}" if lo is not None else "—")
+    ref = html.escape(r.ref_text or fallback)
     panel = html.escape(r.panel or "")
     if r.kb and r.explanation:
         cls = "exp rtl" if lang == "Urdu" else "exp"

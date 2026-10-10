@@ -274,6 +274,13 @@ LANG_HINT = {
     "Urdu": "simple Urdu written in Urdu script",
     "Roman Urdu": "simple Roman Urdu (Urdu written in English letters)",
 }
+# One example sentence per language: small models follow an example far more
+# reliably than an instruction alone (a live run returned English for Roman Urdu).
+LANG_EXAMPLE = {
+    "English": "Your haemoglobin is a little below the normal range.",
+    "Urdu": "آپ کا ہیموگلوبن نارمل حد سے تھوڑا کم ہے۔ یہ خون میں آکسیجن لے جاتا ہے۔",
+    "Roman Urdu": "Aap ka haemoglobin normal hadd se thora kam hai. Yeh khoon mein oxygen le jata hai.",
+}
 
 EXPLAIN_SYSTEM = """You explain lab results to a patient with no medical background.
 You receive results that ALREADY have a verified status and a verified knowledge entry.
@@ -294,7 +301,9 @@ def explain(client, model: str, items: list[dict], language: str) -> dict[str, s
         "status": it["status"],
         "knowledge": {k: it["kb"][k] for k in ("measures", "high_means", "low_means")},
     } for it in items]
-    user = (f"Write in {LANG_HINT.get(language, 'simple English')}.\n"
+    lang = language if language in LANG_HINT else "English"
+    user = (f"Write EVERY explanation in {LANG_HINT[lang]}, not in any other language. "
+            f'Example of the style: "{LANG_EXAMPLE[lang]}"\n'
             f"RESULTS:\n{json.dumps(payload, ensure_ascii=False)}")
     data = _chat_json(client, model, EXPLAIN_SYSTEM, user)
     out = {}
